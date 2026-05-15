@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+
 import { HeartPulse, MapPin, Phone, Mail } from "lucide-react";
 import { CLINIC } from "@/lib/clinic";
 
