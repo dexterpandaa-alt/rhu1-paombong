@@ -446,23 +446,30 @@ function HomePage() {
           <Reveal className="md:col-span-2">
             <div className="grid gap-4">
               {[
-                { icon: MapPin, label: "Address", value: CLINIC.address },
+                { icon: MapPin, label: "Address", value: CLINIC.address, href: CLINIC.mapsUrl },
                 { icon: Phone, label: "Phone", value: CLINIC.phone },
-                { icon: Mail, label: "Email", value: CLINIC.email },
+                { icon: Mail, label: "Email", value: CLINIC.email, href: `mailto:${CLINIC.email}` },
+                { icon: Facebook, label: "Facebook", value: "facebook.com/RHU Paombong", href: CLINIC.facebook },
                 { icon: Clock, label: "Hours", value: "Clinic 24/7 · Doctor Mon–Fri 8AM–5PM" },
-              ].map((it) => (
-                <div key={it.label} className="card-soft flex gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                    <it.icon className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                      {it.label}
+              ].map((it) => {
+                const Wrapper: any = it.href ? "a" : "div";
+                const wrapperProps = it.href
+                  ? { href: it.href, target: "_blank", rel: "noopener noreferrer" }
+                  : {};
+                return (
+                  <Wrapper key={it.label} {...wrapperProps} className="card-soft flex gap-4 hover:border-accent/40">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <it.icon className="h-5 w-5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        {it.label}
+                      </div>
+                      <div className="mt-0.5 font-medium break-words">{it.value}</div>
                     </div>
-                    <div className="mt-0.5 font-medium break-words">{it.value}</div>
-                  </div>
-                </div>
-              ))}
+                  </Wrapper>
+                );
+              })}
             </div>
           </Reveal>
 
