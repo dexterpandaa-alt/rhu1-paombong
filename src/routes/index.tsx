@@ -429,6 +429,33 @@ function HomePage() {
         </div>
       </section>
 
+      {/* ===== BARANGAYS SERVED ===== */}
+      <section id="barangays" className="mx-auto max-w-6xl px-5 py-24 scroll-mt-20">
+        <Reveal>
+          <p className="text-sm font-medium tracking-wide uppercase text-accent">Coverage area</p>
+          <h2 className="mt-3 font-display text-3xl font-bold md:text-5xl max-w-3xl">
+            Serving all <span className="text-gradient">14 barangays</span> of Paombong.
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+            Every family across the municipality is part of our community — wherever
+            you live in Paombong, our doors are open to you.
+          </p>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+          {CLINIC.barangays.map((b, i) => (
+            <Reveal key={b} delay={(i % 7) * 50}>
+              <div className="group flex items-center gap-2 rounded-xl border bg-card/60 px-3 py-3 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-card hover:shadow-[var(--shadow-soft)]">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110">
+                  <HomeIcon className="h-3.5 w-3.5" />
+                </span>
+                <span className="truncate">{b}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* ===== CONTACT + MAP ===== */}
       <section id="contact" className="mx-auto max-w-6xl px-5 py-24 scroll-mt-20">
         <Reveal>
