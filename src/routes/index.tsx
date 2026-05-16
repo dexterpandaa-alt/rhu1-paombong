@@ -277,7 +277,7 @@ function HomePage() {
                   <v.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </span>
                 <h3 className="mt-2 sm:mt-5 font-display text-sm sm:text-lg font-semibold">{v.title}</h3>
-                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-muted-foreground hidden sm:block">{v.desc}</p>
+                <p className="mt-1 sm:mt-2 text-[11px] leading-snug sm:text-sm text-muted-foreground">{v.desc}</p>
               </div>
             </Reveal>
           ))}
