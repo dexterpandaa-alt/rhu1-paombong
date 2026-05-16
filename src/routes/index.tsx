@@ -37,7 +37,7 @@ const services = [
   { icon: Leaf, title: "Nutrition Program", desc: "Counseling and supplemental feeding for at-risk groups." },
 ];
 
-const team = [
+const team: { name: string; role: string; image?: string }[] = [
   { name: "Municipal Health Officer", role: "Physician · Head of RHU" },
   { name: "Public Health Nurse", role: "Nursing & Patient Care" },
   { name: "Rural Health Midwife", role: "Maternal & Child Health" },
@@ -125,7 +125,7 @@ function HomePage() {
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-accent" />
-                  Mon–Fri · 8AM–5PM
+                  Clinic open 24/7 · Doctor Mon–Fri 8–5
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-accent" />
@@ -140,11 +140,25 @@ function HomePage() {
           </div>
 
           <Reveal delay={200} className="relative">
+            {/* Morphing animated blob behind the hero image */}
             <div
-              className="absolute -inset-6 -z-10 rounded-[2rem] opacity-30 blur-2xl"
+              aria-hidden
+              className="absolute -inset-10 -z-10 opacity-70 blur-2xl animate-[morph_14s_ease-in-out_infinite]"
               style={{ background: "var(--gradient-hero)" }}
             />
-            <div className="relative overflow-hidden rounded-[2rem] border shadow-[var(--shadow-glow)]">
+            {/* Slow rotating dashed ring */}
+            <div
+              aria-hidden
+              className="absolute -inset-6 -z-10 rounded-full animate-[spin-slow_28s_linear_infinite] opacity-40"
+              style={{
+                background:
+                  "conic-gradient(from 0deg, transparent 0 60%, color-mix(in oklab, var(--teal) 60%, transparent) 75%, transparent 100%)",
+                maskImage:
+                  "radial-gradient(circle, transparent 58%, black 60%, black 64%, transparent 66%)",
+              }}
+            />
+            <div className="relative overflow-hidden border shadow-[var(--shadow-glow)] animate-[morph_18s_ease-in-out_infinite]"
+                 style={{ borderRadius: "42% 58% 63% 37% / 48% 42% 58% 52%" }}>
               <img
                 src={heroImg}
                 alt="Rural Health Unit clinic exterior in Paombong"
@@ -165,7 +179,7 @@ function HomePage() {
             </div>
             <div className="absolute -top-3 right-4 hidden md:flex items-center gap-2 rounded-full border bg-card/95 backdrop-blur px-3 py-1.5 shadow-[var(--shadow-soft)]">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-medium">Accepting walk-ins</span>
+              <span className="text-xs font-medium">Open 24/7</span>
             </div>
           </Reveal>
         </div>
@@ -255,15 +269,15 @@ function HomePage() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
+        <div className="mt-16 grid grid-cols-3 gap-2 sm:gap-5">
           {values.map((v, i) => (
             <Reveal key={v.title} delay={i * 80}>
-              <div className="card-soft h-full group">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  <v.icon className="h-5 w-5" />
+              <div className="card-soft h-full group p-3 sm:p-6 text-center sm:text-left">
+                <span className="mx-auto sm:mx-0 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                  <v.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-semibold">{v.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{v.desc}</p>
+                <h3 className="mt-2 sm:mt-5 font-display text-sm sm:text-lg font-semibold">{v.title}</h3>
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-muted-foreground hidden sm:block">{v.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -303,11 +317,13 @@ function HomePage() {
                     className="absolute -right-16 -top-16 h-32 w-32 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-30"
                     style={{ background: "var(--teal)" }}
                   />
-                  <span className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
-                    <s.icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="relative mt-5 font-display text-lg font-semibold">{s.title}</h3>
-                  <p className="relative mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                  <div className="relative flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+                      <s.icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="font-display text-base md:text-lg font-semibold truncate">{s.title}</h3>
+                  </div>
+                  <p className="relative mt-3 text-sm text-muted-foreground">{s.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -332,17 +348,26 @@ function HomePage() {
           {team.map((m, i) => (
             <Reveal key={m.name} delay={i * 70}>
               <div className="card-soft h-full text-center group">
-                <div className="relative mx-auto h-20 w-20">
+                <div className="relative mx-auto h-24 w-24">
                   <div
                     className="absolute inset-0 rounded-full opacity-40 blur-md transition-opacity duration-500 group-hover:opacity-70"
                     style={{ background: "var(--gradient-hero)" }}
                   />
-                  <div
-                    className="relative mx-auto flex h-20 w-20 items-center justify-center rounded-full text-primary-foreground transition-transform duration-500 group-hover:scale-105"
-                    style={{ background: "var(--gradient-hero)" }}
-                  >
-                    <UserRound className="h-9 w-9" />
-                  </div>
+                  {m.image ? (
+                    <img
+                      src={m.image}
+                      alt={m.name}
+                      loading="lazy"
+                      className="relative mx-auto h-24 w-24 rounded-full object-cover ring-2 ring-card shadow-[var(--shadow-soft)] transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div
+                      className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full text-primary-foreground transition-transform duration-500 group-hover:scale-105"
+                      style={{ background: "var(--gradient-hero)" }}
+                    >
+                      <UserRound className="h-10 w-10" />
+                    </div>
+                  )}
                 </div>
                 <h3 className="mt-5 font-display text-lg font-semibold">{m.name}</h3>
                 <p className="mt-1 text-sm text-accent">{m.role}</p>
@@ -424,7 +449,7 @@ function HomePage() {
                 { icon: MapPin, label: "Address", value: CLINIC.address },
                 { icon: Phone, label: "Phone", value: CLINIC.phone },
                 { icon: Mail, label: "Email", value: CLINIC.email },
-                { icon: Clock, label: "Hours", value: "Mon–Fri · 8AM–5PM" },
+                { icon: Clock, label: "Hours", value: "Clinic 24/7 · Doctor Mon–Fri 8AM–5PM" },
               ].map((it) => (
                 <div key={it.label} className="card-soft flex gap-4">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">

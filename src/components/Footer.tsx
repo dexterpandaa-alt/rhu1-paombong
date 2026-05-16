@@ -1,5 +1,5 @@
 
-import { HeartPulse, MapPin, Phone, Mail } from "lucide-react";
+import { HeartPulse, MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 import { CLINIC } from "@/lib/clinic";
 
 export function Footer() {
@@ -24,12 +24,24 @@ export function Footer() {
 
         <div>
           <h4 className="text-sm font-semibold">Explore</h4>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><a href="/#about" className="hover:text-accent transition">About</a></li>
-            <li><a href="/#services" className="hover:text-accent transition">Services</a></li>
-            <li><a href="/#team" className="hover:text-accent transition">Our Team</a></li>
-            <li><a href="/#hours" className="hover:text-accent transition">Hours</a></li>
-            <li><a href="/#contact" className="hover:text-accent transition">Contact</a></li>
+          <ul className="mt-3 space-y-1.5 text-sm">
+            {[
+              { href: "/#about", label: "About" },
+              { href: "/#services", label: "Services" },
+              { href: "/#team", label: "Our Team" },
+              { href: "/#hours", label: "Hours" },
+              { href: "/#contact", label: "Contact" },
+            ].map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className="group inline-flex items-center gap-1.5 rounded-md px-2 py-1 -mx-2 text-foreground/80 underline-offset-4 hover:bg-accent/10 hover:text-accent hover:underline transition"
+                >
+                  <ArrowUpRight className="h-3.5 w-3.5 text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  {l.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
