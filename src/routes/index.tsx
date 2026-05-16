@@ -269,15 +269,15 @@ function HomePage() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
+        <div className="mt-16 grid grid-cols-3 gap-2 sm:gap-5">
           {values.map((v, i) => (
             <Reveal key={v.title} delay={i * 80}>
-              <div className="card-soft h-full group">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  <v.icon className="h-5 w-5" />
+              <div className="card-soft h-full group p-3 sm:p-6 text-center sm:text-left">
+                <span className="mx-auto sm:mx-0 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                  <v.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-semibold">{v.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{v.desc}</p>
+                <h3 className="mt-2 sm:mt-5 font-display text-sm sm:text-lg font-semibold">{v.title}</h3>
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-muted-foreground hidden sm:block">{v.desc}</p>
               </div>
             </Reveal>
           ))}
