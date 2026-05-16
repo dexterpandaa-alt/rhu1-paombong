@@ -1,5 +1,5 @@
 
-import { HeartPulse, MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
+import { HeartPulse, MapPin, Phone, Mail, ArrowUpRight, Facebook } from "lucide-react";
 import { CLINIC } from "@/lib/clinic";
 
 export function Footer() {
