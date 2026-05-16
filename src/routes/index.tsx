@@ -125,7 +125,7 @@ function HomePage() {
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-accent" />
-                  Mon–Fri · 8AM–5PM
+                  Clinic open 24/7 · Doctor Mon–Fri 8–5
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-accent" />
@@ -140,11 +140,25 @@ function HomePage() {
           </div>
 
           <Reveal delay={200} className="relative">
+            {/* Morphing animated blob behind the hero image */}
             <div
-              className="absolute -inset-6 -z-10 rounded-[2rem] opacity-30 blur-2xl"
+              aria-hidden
+              className="absolute -inset-10 -z-10 opacity-70 blur-2xl animate-[morph_14s_ease-in-out_infinite]"
               style={{ background: "var(--gradient-hero)" }}
             />
-            <div className="relative overflow-hidden rounded-[2rem] border shadow-[var(--shadow-glow)]">
+            {/* Slow rotating dashed ring */}
+            <div
+              aria-hidden
+              className="absolute -inset-6 -z-10 rounded-full animate-[spin-slow_28s_linear_infinite] opacity-40"
+              style={{
+                background:
+                  "conic-gradient(from 0deg, transparent 0 60%, color-mix(in oklab, var(--teal) 60%, transparent) 75%, transparent 100%)",
+                maskImage:
+                  "radial-gradient(circle, transparent 58%, black 60%, black 64%, transparent 66%)",
+              }}
+            />
+            <div className="relative overflow-hidden border shadow-[var(--shadow-glow)] animate-[morph_18s_ease-in-out_infinite]"
+                 style={{ borderRadius: "42% 58% 63% 37% / 48% 42% 58% 52%" }}>
               <img
                 src={heroImg}
                 alt="Rural Health Unit clinic exterior in Paombong"
@@ -165,7 +179,7 @@ function HomePage() {
             </div>
             <div className="absolute -top-3 right-4 hidden md:flex items-center gap-2 rounded-full border bg-card/95 backdrop-blur px-3 py-1.5 shadow-[var(--shadow-soft)]">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-medium">Accepting walk-ins</span>
+              <span className="text-xs font-medium">Open 24/7</span>
             </div>
           </Reveal>
         </div>
