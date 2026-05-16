@@ -348,17 +348,26 @@ function HomePage() {
           {team.map((m, i) => (
             <Reveal key={m.name} delay={i * 70}>
               <div className="card-soft h-full text-center group">
-                <div className="relative mx-auto h-20 w-20">
+                <div className="relative mx-auto h-24 w-24">
                   <div
                     className="absolute inset-0 rounded-full opacity-40 blur-md transition-opacity duration-500 group-hover:opacity-70"
                     style={{ background: "var(--gradient-hero)" }}
                   />
-                  <div
-                    className="relative mx-auto flex h-20 w-20 items-center justify-center rounded-full text-primary-foreground transition-transform duration-500 group-hover:scale-105"
-                    style={{ background: "var(--gradient-hero)" }}
-                  >
-                    <UserRound className="h-9 w-9" />
-                  </div>
+                  {m.image ? (
+                    <img
+                      src={m.image}
+                      alt={m.name}
+                      loading="lazy"
+                      className="relative mx-auto h-24 w-24 rounded-full object-cover ring-2 ring-card shadow-[var(--shadow-soft)] transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div
+                      className="relative mx-auto flex h-24 w-24 items-center justify-center rounded-full text-primary-foreground transition-transform duration-500 group-hover:scale-105"
+                      style={{ background: "var(--gradient-hero)" }}
+                    >
+                      <UserRound className="h-10 w-10" />
+                    </div>
+                  )}
                 </div>
                 <h3 className="mt-5 font-display text-lg font-semibold">{m.name}</h3>
                 <p className="mt-1 text-sm text-accent">{m.role}</p>
