@@ -37,7 +37,7 @@ const services = [
   { icon: Leaf, title: "Nutrition Program", desc: "Counseling and supplemental feeding for at-risk groups." },
 ];
 
-const team = [
+const team: { name: string; role: string; image?: string }[] = [
   { name: "Municipal Health Officer", role: "Physician · Head of RHU" },
   { name: "Public Health Nurse", role: "Nursing & Patient Care" },
   { name: "Rural Health Midwife", role: "Maternal & Child Health" },
