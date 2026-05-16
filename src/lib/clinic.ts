@@ -6,6 +6,7 @@ export const CLINIC = {
   phone: "(044) 000-0000",
   email: "rhu1.paombongofficial@gmail.com",
   mapsUrl: "https://maps.app.goo.gl/8CsmjEpGRwY55rBg9",
+  facebook: "https://www.facebook.com/share/1BTQiJaGhd/?mibextid=wwXIfr",
   // Embed via place query – no API key needed
   mapEmbed:
     "https://www.google.com/maps?q=Rural+Health+Unit+Paombong+Bulacan&output=embed",
@@ -16,4 +17,9 @@ export const CLINIC = {
   ],
   doctorHours: "Mon–Fri · 8AM–5PM",
   clinicHours: "Open 24/7",
+  barangays: [
+    "Binakod", "Bulihan", "Kapitangan", "Malumot", "Masukol", "Pinalagdan",
+    "Poblacion", "San Isidro I", "San Isidro II", "San Jose", "San Roque",
+    "San Vicente", "Santa Cruz", "Santo Niño",
+  ],
 };

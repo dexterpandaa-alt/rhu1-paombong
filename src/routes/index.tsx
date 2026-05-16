@@ -3,7 +3,7 @@ import {
   ArrowRight, Stethoscope, Syringe, Baby, HeartPulse, Activity, ShieldCheck,
   Pill, Microscope, Users, Bandage, Brain, Leaf,
   MapPin, Clock, Phone, Mail, Heart, Target, Eye, Award, AlertCircle,
-  UserRound, Sparkles, ChevronDown,
+  UserRound, Sparkles, ChevronDown, Facebook, Home as HomeIcon,
 } from "lucide-react";
 import heroImg from "@/assets/hero-clinic.jpg";
 import aboutImg from "@/assets/about-care.jpg";
@@ -277,7 +277,7 @@ function HomePage() {
                   <v.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </span>
                 <h3 className="mt-2 sm:mt-5 font-display text-sm sm:text-lg font-semibold">{v.title}</h3>
-                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-muted-foreground hidden sm:block">{v.desc}</p>
+                <p className="mt-1 sm:mt-2 text-[11px] leading-snug sm:text-sm text-muted-foreground">{v.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -429,6 +429,33 @@ function HomePage() {
         </div>
       </section>
 
+      {/* ===== BARANGAYS SERVED ===== */}
+      <section id="barangays" className="mx-auto max-w-6xl px-5 py-24 scroll-mt-20">
+        <Reveal>
+          <p className="text-sm font-medium tracking-wide uppercase text-accent">Coverage area</p>
+          <h2 className="mt-3 font-display text-3xl font-bold md:text-5xl max-w-3xl">
+            Serving all <span className="text-gradient">14 barangays</span> of Paombong.
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+            Every family across the municipality is part of our community — wherever
+            you live in Paombong, our doors are open to you.
+          </p>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+          {CLINIC.barangays.map((b, i) => (
+            <Reveal key={b} delay={(i % 7) * 50}>
+              <div className="group flex items-center gap-2 rounded-xl border bg-card/60 px-3 py-3 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-card hover:shadow-[var(--shadow-soft)]">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110">
+                  <HomeIcon className="h-3.5 w-3.5" />
+                </span>
+                <span className="truncate">{b}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* ===== CONTACT + MAP ===== */}
       <section id="contact" className="mx-auto max-w-6xl px-5 py-24 scroll-mt-20">
         <Reveal>
@@ -446,23 +473,30 @@ function HomePage() {
           <Reveal className="md:col-span-2">
             <div className="grid gap-4">
               {[
-                { icon: MapPin, label: "Address", value: CLINIC.address },
+                { icon: MapPin, label: "Address", value: CLINIC.address, href: CLINIC.mapsUrl },
                 { icon: Phone, label: "Phone", value: CLINIC.phone },
-                { icon: Mail, label: "Email", value: CLINIC.email },
+                { icon: Mail, label: "Email", value: CLINIC.email, href: `mailto:${CLINIC.email}` },
+                { icon: Facebook, label: "Facebook", value: "facebook.com/RHU Paombong", href: CLINIC.facebook },
                 { icon: Clock, label: "Hours", value: "Clinic 24/7 · Doctor Mon–Fri 8AM–5PM" },
-              ].map((it) => (
-                <div key={it.label} className="card-soft flex gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                    <it.icon className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-                      {it.label}
+              ].map((it) => {
+                const Wrapper: any = it.href ? "a" : "div";
+                const wrapperProps = it.href
+                  ? { href: it.href, target: "_blank", rel: "noopener noreferrer" }
+                  : {};
+                return (
+                  <Wrapper key={it.label} {...wrapperProps} className="card-soft flex gap-4 hover:border-accent/40">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                      <it.icon className="h-5 w-5" />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                        {it.label}
+                      </div>
+                      <div className="mt-0.5 font-medium break-words">{it.value}</div>
                     </div>
-                    <div className="mt-0.5 font-medium break-words">{it.value}</div>
-                  </div>
-                </div>
-              ))}
+                  </Wrapper>
+                );
+              })}
             </div>
           </Reveal>
 

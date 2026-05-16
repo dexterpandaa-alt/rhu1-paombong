@@ -1,5 +1,5 @@
 
-import { HeartPulse, MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
+import { HeartPulse, MapPin, Phone, Mail, ArrowUpRight, Facebook } from "lucide-react";
 import { CLINIC } from "@/lib/clinic";
 
 export function Footer() {
@@ -51,6 +51,11 @@ export function Footer() {
             <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-accent" />{CLINIC.address}</li>
             <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 text-accent" />{CLINIC.phone}</li>
             <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-accent" />{CLINIC.email}</li>
+            <li>
+              <a href={CLINIC.facebook} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-foreground/80 hover:text-accent transition">
+                <Facebook className="h-4 w-4 text-accent" />facebook.com/RHU Paombong
+              </a>
+            </li>
           </ul>
         </div>
       </div>
