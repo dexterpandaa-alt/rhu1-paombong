@@ -449,7 +449,7 @@ function HomePage() {
                 { icon: MapPin, label: "Address", value: CLINIC.address },
                 { icon: Phone, label: "Phone", value: CLINIC.phone },
                 { icon: Mail, label: "Email", value: CLINIC.email },
-                { icon: Clock, label: "Hours", value: "Mon–Fri · 8AM–5PM" },
+                { icon: Clock, label: "Hours", value: "Clinic 24/7 · Doctor Mon–Fri 8AM–5PM" },
               ].map((it) => (
                 <div key={it.label} className="card-soft flex gap-4">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
