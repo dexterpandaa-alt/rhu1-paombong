@@ -317,11 +317,13 @@ function HomePage() {
                     className="absolute -right-16 -top-16 h-32 w-32 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-30"
                     style={{ background: "var(--teal)" }}
                   />
-                  <span className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
-                    <s.icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="relative mt-5 font-display text-lg font-semibold">{s.title}</h3>
-                  <p className="relative mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                  <div className="relative flex items-center gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+                      <s.icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="font-display text-base md:text-lg font-semibold truncate">{s.title}</h3>
+                  </div>
+                  <p className="relative mt-3 text-sm text-muted-foreground">{s.desc}</p>
                 </div>
               </Reveal>
             ))}
