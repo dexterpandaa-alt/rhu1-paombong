@@ -3,7 +3,7 @@ import {
   ArrowRight, Stethoscope, Syringe, Baby, HeartPulse, Activity, ShieldCheck,
   Pill, Microscope, Users, Bandage, Brain, Leaf,
   MapPin, Clock, Phone, Mail, Heart, Target, Eye, Award, AlertCircle,
-  UserRound, Sparkles, ChevronDown,
+  UserRound, Sparkles, ChevronDown, Facebook, Home as HomeIcon,
 } from "lucide-react";
 import heroImg from "@/assets/hero-clinic.jpg";
 import aboutImg from "@/assets/about-care.jpg";
