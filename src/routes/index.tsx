@@ -201,7 +201,7 @@ function HomePage() {
               </span>
               <div>
                 <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Trusted by</div>
-                <div className="text-sm font-semibold">10,000+ families</div>
+                <div className="text-sm font-semibold">10,000+ patients</div>
               </div>
             </div>
             <div className="absolute -top-3 right-4 hidden md:flex items-center gap-2 rounded-full border bg-card/95 backdrop-blur px-3 py-1.5 shadow-[var(--shadow-soft)]">
