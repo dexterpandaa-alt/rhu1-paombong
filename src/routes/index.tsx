@@ -4,13 +4,14 @@ import {
   ArrowRight, Stethoscope, Syringe, Baby, HeartPulse, Activity, ShieldCheck,
   Microscope, Bandage, Leaf, Dog,
   MapPin, Clock, Phone, Mail, Heart, Target, Eye, Award, AlertCircle,
-  UserRound, Sparkles, ChevronDown, Facebook, Home as HomeIcon,
+  UserRound, Sparkles, ChevronDown, Facebook, Home as HomeIcon, CalendarCheck,
 } from "lucide-react";
 import heroImg from "@/assets/hero-clinic.jpg";
 import aboutImg from "@/assets/about-care.jpg";
 import { Reveal } from "@/components/Reveal";
 import { MapEmbed } from "@/components/MapEmbed";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { openAppointment } from "@/components/AppointmentDialog";
 import { CLINIC } from "@/lib/clinic";
 
 export const Route = createFileRoute("/")({
@@ -41,7 +42,7 @@ const team: { name: string; role: string; image?: string }[] = [
   { name: "Public Health Nurse", role: "Nursing & Patient Care" },
   { name: "Rural Health Midwife", role: "Maternal & Child Health" },
   { name: "Medical Technologist", role: "Laboratory Services" },
-  { name: "Dentist", role: "Doctor of Dental Medicine" },
+  { name: "Dental Practitioner", role: "Doctor of Dental Medicine" },
   { name: "Sanitation Inspector", role: "Public Health & Hygiene" },
 ];
 
@@ -58,21 +59,28 @@ function CountUp({ value, suffix = "", duration = 1800 }: { value: number; suffi
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && !started.current) {
-          started.current = true;
-          const start = performance.now();
-          const tick = (t: number) => {
-            const p = Math.min(1, (t - start) / duration);
-            const eased = 1 - Math.pow(1 - p, 3);
-            setN(Math.round(value * eased));
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
-      });
-    }, { threshold: 0.4 });
+    const run = () => {
+      if (started.current) return;
+      started.current = true;
+      const start = performance.now();
+      const tick = (t: number) => {
+        const p = Math.min(1, (t - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setN(Math.round(value * eased));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    // Trigger immediately if already in viewport
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      run();
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) run(); }),
+      { threshold: 0.05, rootMargin: "0px 0px -10% 0px" }
+    );
     io.observe(el);
     return () => io.disconnect();
   }, [value, duration]);
@@ -139,9 +147,12 @@ function HomePage() {
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#services" className="btn-primary group">
-                  Our Services{" "}
+                <button onClick={openAppointment} className="btn-primary group">
+                  <CalendarCheck className="h-4 w-4" /> Book a Visit
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </button>
+                <a href="#services" className="btn-ghost">
+                  Our Services
                 </a>
                 <a href="#contact" className="btn-ghost">
                   <MapPin className="h-4 w-4" /> Find Us
@@ -223,7 +234,7 @@ function HomePage() {
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-5 py-10 md:grid-cols-4">
           {[
             { n: 10000, suffix: "+", v: "Patients served" },
-            { n: 15, suffix: "+", v: "Health programs" },
+            { n: 10, suffix: "+", v: "Health programs" },
             { n: 20, suffix: "+", v: "Trained staff" },
             { n: 100, suffix: "%", v: "Community-focused" },
           ].map((s, i) => (
@@ -531,7 +542,7 @@ function HomePage() {
                   ? { href: it.href, target: "_blank", rel: "noopener noreferrer" }
                   : {};
                 return (
-                  <Wrapper key={it.label} {...wrapperProps} className="card-soft flex gap-4 pr-8 hover:border-accent/40">
+                  <Wrapper key={it.label} {...wrapperProps} className="card-soft flex gap-4 hover:border-accent/40">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                       <it.icon className="h-5 w-5" />
                     </span>
