@@ -30,11 +30,9 @@ const services = [
   { icon: HeartPulse, title: "Chronic Disease Care", desc: "Hypertension, diabetes, and lifestyle condition management." },
   { icon: Activity, title: "Laboratory Services", desc: "Basic diagnostics — blood tests, urinalysis, screening." },
   { icon: ShieldCheck, title: "Public Health", desc: "Sanitation, vector control, and disease surveillance." },
-  { icon: Pill, title: "Pharmacy", desc: "Essential medicines under government health programs." },
   { icon: Microscope, title: "TB & DOTS", desc: "TB screening, DOTS treatment, and follow-up care." },
-  { icon: Users, title: "Senior Citizen Care", desc: "Dedicated check-ups and support for our elders." },
   { icon: Bandage, title: "Minor Treatments", desc: "First-aid, wound care, and outpatient procedures." },
-  { icon: Brain, title: "Mental Health", desc: "Initial consultation and referral for wellness." },
+  { icon: Dog, title: "Animal Bite", desc: "Anti-rabies vaccination and wound care for bite injuries." },
   { icon: Leaf, title: "Nutrition Program", desc: "Counseling and supplemental feeding for at-risk groups." },
 ];
 
@@ -43,8 +41,8 @@ const team: { name: string; role: string; image?: string }[] = [
   { name: "Public Health Nurse", role: "Nursing & Patient Care" },
   { name: "Rural Health Midwife", role: "Maternal & Child Health" },
   { name: "Medical Technologist", role: "Laboratory Services" },
+  { name: "Dentist", role: "Doctor of Dental Medicine" },
   { name: "Sanitation Inspector", role: "Public Health & Hygiene" },
-  { name: "Barangay Health Workers", role: "Community Outreach" },
 ];
 
 const values = [
