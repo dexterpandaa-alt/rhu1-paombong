@@ -147,9 +147,12 @@ function HomePage() {
             </Reveal>
             <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#services" className="btn-primary group">
-                  Our Services{" "}
+                <button onClick={openAppointment} className="btn-primary group">
+                  <CalendarCheck className="h-4 w-4" /> Book a Visit
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </button>
+                <a href="#services" className="btn-ghost">
+                  Our Services
                 </a>
                 <a href="#contact" className="btn-ghost">
                   <MapPin className="h-4 w-4" /> Find Us
