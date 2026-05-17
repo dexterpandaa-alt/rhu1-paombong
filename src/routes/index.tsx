@@ -332,7 +332,7 @@ function HomePage() {
                 </h2>
               </div>
               <p className="max-w-sm text-sm text-muted-foreground">
-                Twelve programs spanning preventive, primary, and public health —
+                Ten programs spanning preventive, primary, and public health —
                 most offered free of charge.
               </p>
             </div>
