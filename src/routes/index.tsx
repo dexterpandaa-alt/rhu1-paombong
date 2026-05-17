@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, Stethoscope, Syringe, Baby, HeartPulse, Activity, ShieldCheck,
-  Microscope, Bandage, Leaf, Dog, Smile,
+  Microscope, Bandage, Leaf, Dog,
   MapPin, Clock, Phone, Mail, Heart, Target, Eye, Award, AlertCircle,
   UserRound, Sparkles, ChevronDown, Facebook, Home as HomeIcon,
 } from "lucide-react";
