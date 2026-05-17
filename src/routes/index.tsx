@@ -59,21 +59,28 @@ function CountUp({ value, suffix = "", duration = 1800 }: { value: number; suffi
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting && !started.current) {
-          started.current = true;
-          const start = performance.now();
-          const tick = (t: number) => {
-            const p = Math.min(1, (t - start) / duration);
-            const eased = 1 - Math.pow(1 - p, 3);
-            setN(Math.round(value * eased));
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
-      });
-    }, { threshold: 0.4 });
+    const run = () => {
+      if (started.current) return;
+      started.current = true;
+      const start = performance.now();
+      const tick = (t: number) => {
+        const p = Math.min(1, (t - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setN(Math.round(value * eased));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    // Trigger immediately if already in viewport
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      run();
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) run(); }),
+      { threshold: 0.05, rootMargin: "0px 0px -10% 0px" }
+    );
     io.observe(el);
     return () => io.disconnect();
   }, [value, duration]);
