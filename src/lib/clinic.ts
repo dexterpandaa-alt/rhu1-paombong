@@ -13,7 +13,7 @@ export const CLINIC = {
   hours: [
     { day: "Clinic (Walk-in)", time: "Open 24 / 7" },
     { day: "Doctor on Duty", time: "Mon – Fri · 8:00 AM – 5:00 PM" },
-    { day: "Weekend & Holidays", time: "Nurse & staff on standby" },
+    { day: "Weekend & Holidays", time: "Midwives & staff on standby" },
   ],
   doctorHours: "Mon–Fri · 8AM–5PM",
   clinicHours: "Open 24/7",
