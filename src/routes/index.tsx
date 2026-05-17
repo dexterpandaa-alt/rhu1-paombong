@@ -231,7 +231,7 @@ function HomePage() {
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-5 py-10 md:grid-cols-4">
           {[
             { n: 10000, suffix: "+", v: "Patients served" },
-            { n: 15, suffix: "+", v: "Health programs" },
+            { n: 10, suffix: "+", v: "Health programs" },
             { n: 20, suffix: "+", v: "Trained staff" },
             { n: 100, suffix: "%", v: "Community-focused" },
           ].map((s, i) => (
