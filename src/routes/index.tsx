@@ -471,7 +471,25 @@ function HomePage() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+        {/* Mobile: scrolling marquee */}
+        <div className="mt-10 sm:hidden relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+          <div className="flex w-max gap-3 animate-[marquee_32s_linear_infinite]">
+            {[...CLINIC.barangays, ...CLINIC.barangays].map((b, i) => (
+              <div
+                key={`${b}-${i}`}
+                className="flex items-center gap-2 rounded-xl border bg-card/60 px-3 py-2.5 text-sm font-medium shrink-0"
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                  <HomeIcon className="h-3.5 w-3.5" />
+                </span>
+                <span>{b}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: grid */}
+        <div className="mt-12 hidden sm:grid grid-cols-3 gap-3 md:grid-cols-4 lg:grid-cols-7">
           {CLINIC.barangays.map((b, i) => (
             <Reveal key={b} delay={(i % 7) * 50}>
               <div className="group flex items-center gap-2 rounded-xl border bg-card/60 px-3 py-3 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-card hover:shadow-[var(--shadow-soft)]">
