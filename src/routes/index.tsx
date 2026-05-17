@@ -222,13 +222,15 @@ function HomePage() {
       <section className="border-y bg-secondary/40 backdrop-blur">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-5 py-10 md:grid-cols-4">
           {[
-            { k: "10K+", v: "Patients served" },
-            { k: "15+", v: "Health programs" },
-            { k: "20+", v: "Trained staff" },
-            { k: "100%", v: "Community-focused" },
+            { n: 10000, suffix: "+", v: "Patients served" },
+            { n: 15, suffix: "+", v: "Health programs" },
+            { n: 20, suffix: "+", v: "Trained staff" },
+            { n: 100, suffix: "%", v: "Community-focused" },
           ].map((s, i) => (
             <Reveal key={s.v} delay={i * 80} className="text-center">
-              <div className="font-display text-3xl font-bold text-gradient md:text-4xl">{s.k}</div>
+              <div className="font-display text-3xl font-bold text-gradient md:text-4xl tabular-nums">
+                <CountUp value={s.n} suffix={s.suffix} />
+              </div>
               <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{s.v}</div>
             </Reveal>
           ))}
