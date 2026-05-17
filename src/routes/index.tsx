@@ -531,7 +531,7 @@ function HomePage() {
                   ? { href: it.href, target: "_blank", rel: "noopener noreferrer" }
                   : {};
                 return (
-                  <Wrapper key={it.label} {...wrapperProps} className="card-soft flex gap-4 hover:border-accent/40">
+                  <Wrapper key={it.label} {...wrapperProps} className="card-soft flex gap-4 pr-8 hover:border-accent/40">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                       <it.icon className="h-5 w-5" />
                     </span>
