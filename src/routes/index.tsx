@@ -152,7 +152,7 @@ function HomePage() {
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-accent" />
-                  Clinic open 24/7 · Doctor Mon–Fri 8–5
+                  Clinic open 24/7 · Doctor Mon–Fri 8AM–5PM
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-accent" />
