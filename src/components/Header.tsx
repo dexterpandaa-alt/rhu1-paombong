@@ -129,13 +129,12 @@ export function Header() {
                 </a>
               );
             })}
-            <a
-              href="/#contact"
-              onClick={() => setOpen(false)}
+            <button
+              onClick={() => { setOpen(false); openAppointment(); }}
               className="btn-primary mt-3 mb-2 text-sm"
             >
-              Visit Us
-            </a>
+              <CalendarCheck className="h-4 w-4" /> Book Visit
+            </button>
           </nav>
         </div>
       )}
