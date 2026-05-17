@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, Stethoscope, Syringe, Baby, HeartPulse, Activity, ShieldCheck,
-  Pill, Microscope, Users, Bandage, Brain, Leaf,
+  Microscope, Bandage, Leaf, Dog,
   MapPin, Clock, Phone, Mail, Heart, Target, Eye, Award, AlertCircle,
   UserRound, Sparkles, ChevronDown, Facebook, Home as HomeIcon,
 } from "lucide-react";
@@ -29,11 +30,9 @@ const services = [
   { icon: HeartPulse, title: "Chronic Disease Care", desc: "Hypertension, diabetes, and lifestyle condition management." },
   { icon: Activity, title: "Laboratory Services", desc: "Basic diagnostics — blood tests, urinalysis, screening." },
   { icon: ShieldCheck, title: "Public Health", desc: "Sanitation, vector control, and disease surveillance." },
-  { icon: Pill, title: "Pharmacy", desc: "Essential medicines under government health programs." },
   { icon: Microscope, title: "TB & DOTS", desc: "TB screening, DOTS treatment, and follow-up care." },
-  { icon: Users, title: "Senior Citizen Care", desc: "Dedicated check-ups and support for our elders." },
   { icon: Bandage, title: "Minor Treatments", desc: "First-aid, wound care, and outpatient procedures." },
-  { icon: Brain, title: "Mental Health", desc: "Initial consultation and referral for wellness." },
+  { icon: Dog, title: "Animal Bite", desc: "Anti-rabies vaccination and wound care for bite injuries." },
   { icon: Leaf, title: "Nutrition Program", desc: "Counseling and supplemental feeding for at-risk groups." },
 ];
 
@@ -42,8 +41,8 @@ const team: { name: string; role: string; image?: string }[] = [
   { name: "Public Health Nurse", role: "Nursing & Patient Care" },
   { name: "Rural Health Midwife", role: "Maternal & Child Health" },
   { name: "Medical Technologist", role: "Laboratory Services" },
+  { name: "Dentist", role: "Doctor of Dental Medicine" },
   { name: "Sanitation Inspector", role: "Public Health & Hygiene" },
-  { name: "Barangay Health Workers", role: "Community Outreach" },
 ];
 
 const values = [
@@ -51,6 +50,34 @@ const values = [
   { icon: Award, title: "Excellence", desc: "Evidence-based, quality care for every visit." },
   { icon: Target, title: "Community", desc: "Healthcare that listens to local needs." },
 ];
+
+function CountUp({ value, suffix = "", duration = 1800 }: { value: number; suffix?: string; duration?: number }) {
+  const [n, setN] = useState(0);
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const started = useRef(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !started.current) {
+          started.current = true;
+          const start = performance.now();
+          const tick = (t: number) => {
+            const p = Math.min(1, (t - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setN(Math.round(value * eased));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      });
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [value, duration]);
+  return <span ref={ref}>{n.toLocaleString()}{suffix}</span>;
+}
 
 function HomePage() {
   return (
@@ -125,7 +152,7 @@ function HomePage() {
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-accent" />
-                  Clinic open 24/7 · Doctor Mon–Fri 8–5
+                  Clinic open 24/7 · Doctor Mon–Fri 8AM–5PM
                 </div>
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-accent" />
@@ -174,7 +201,7 @@ function HomePage() {
               </span>
               <div>
                 <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Trusted by</div>
-                <div className="text-sm font-semibold">10,000+ families</div>
+                <div className="text-sm font-semibold">10,000+ patients</div>
               </div>
             </div>
             <div className="absolute -top-3 right-4 hidden md:flex items-center gap-2 rounded-full border bg-card/95 backdrop-blur px-3 py-1.5 shadow-[var(--shadow-soft)]">
@@ -195,13 +222,15 @@ function HomePage() {
       <section className="border-y bg-secondary/40 backdrop-blur">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-5 py-10 md:grid-cols-4">
           {[
-            { k: "10K+", v: "Patients served" },
-            { k: "15+", v: "Health programs" },
-            { k: "20+", v: "Trained staff" },
-            { k: "100%", v: "Community-focused" },
+            { n: 10000, suffix: "+", v: "Patients served" },
+            { n: 15, suffix: "+", v: "Health programs" },
+            { n: 20, suffix: "+", v: "Trained staff" },
+            { n: 100, suffix: "%", v: "Community-focused" },
           ].map((s, i) => (
             <Reveal key={s.v} delay={i * 80} className="text-center">
-              <div className="font-display text-3xl font-bold text-gradient md:text-4xl">{s.k}</div>
+              <div className="font-display text-3xl font-bold text-gradient md:text-4xl tabular-nums">
+                <CountUp value={s.n} suffix={s.suffix} />
+              </div>
               <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{s.v}</div>
             </Reveal>
           ))}
@@ -303,7 +332,7 @@ function HomePage() {
                 </h2>
               </div>
               <p className="max-w-sm text-sm text-muted-foreground">
-                Twelve programs spanning preventive, primary, and public health —
+                Ten programs spanning preventive, primary, and public health —
                 most offered free of charge.
               </p>
             </div>
@@ -442,7 +471,25 @@ function HomePage() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
+        {/* Mobile: scrolling marquee */}
+        <div className="mt-10 sm:hidden relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
+          <div className="flex w-max gap-3 animate-[marquee_32s_linear_infinite]">
+            {[...CLINIC.barangays, ...CLINIC.barangays].map((b, i) => (
+              <div
+                key={`${b}-${i}`}
+                className="flex items-center gap-2 rounded-xl border bg-card/60 px-3 py-2.5 text-sm font-medium shrink-0"
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                  <HomeIcon className="h-3.5 w-3.5" />
+                </span>
+                <span>{b}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: grid */}
+        <div className="mt-12 hidden sm:grid grid-cols-3 gap-3 md:grid-cols-4 lg:grid-cols-7">
           {CLINIC.barangays.map((b, i) => (
             <Reveal key={b} delay={(i % 7) * 50}>
               <div className="group flex items-center gap-2 rounded-xl border bg-card/60 px-3 py-3 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:bg-card hover:shadow-[var(--shadow-soft)]">
@@ -484,7 +531,7 @@ function HomePage() {
                   ? { href: it.href, target: "_blank", rel: "noopener noreferrer" }
                   : {};
                 return (
-                  <Wrapper key={it.label} {...wrapperProps} className="card-soft flex gap-4 hover:border-accent/40">
+                  <Wrapper key={it.label} {...wrapperProps} className="card-soft flex gap-4 pr-8 hover:border-accent/40">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                       <it.icon className="h-5 w-5" />
                     </span>
