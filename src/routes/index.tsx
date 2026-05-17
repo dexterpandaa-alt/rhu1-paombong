@@ -42,7 +42,7 @@ const team: { name: string; role: string; image?: string }[] = [
   { name: "Public Health Nurse", role: "Nursing & Patient Care" },
   { name: "Rural Health Midwife", role: "Maternal & Child Health" },
   { name: "Medical Technologist", role: "Laboratory Services" },
-  { name: "Dentist", role: "Doctor of Dental Medicine" },
+  { name: "Dental Practitioner", role: "Doctor of Dental Medicine" },
   { name: "Sanitation Inspector", role: "Public Health & Hygiene" },
 ];
 
