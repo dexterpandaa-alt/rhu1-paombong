@@ -11,6 +11,7 @@ import {
 import appCss from "../styles.css?url";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { AppointmentDialog } from "@/components/AppointmentDialog";
 
 function NotFoundComponent() {
   return (
