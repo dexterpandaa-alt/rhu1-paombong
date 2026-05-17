@@ -4,13 +4,14 @@ import {
   ArrowRight, Stethoscope, Syringe, Baby, HeartPulse, Activity, ShieldCheck,
   Microscope, Bandage, Leaf, Dog,
   MapPin, Clock, Phone, Mail, Heart, Target, Eye, Award, AlertCircle,
-  UserRound, Sparkles, ChevronDown, Facebook, Home as HomeIcon,
+  UserRound, Sparkles, ChevronDown, Facebook, Home as HomeIcon, CalendarCheck,
 } from "lucide-react";
 import heroImg from "@/assets/hero-clinic.jpg";
 import aboutImg from "@/assets/about-care.jpg";
 import { Reveal } from "@/components/Reveal";
 import { MapEmbed } from "@/components/MapEmbed";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { openAppointment } from "@/components/AppointmentDialog";
 import { CLINIC } from "@/lib/clinic";
 
 export const Route = createFileRoute("/")({
